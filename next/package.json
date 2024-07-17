@@ -19,7 +19,7 @@
 		"clsx": "^2.1.1",
 		"feed": "^4.2.2",
 		"groq": "^3.49.0",
-		"next": "^14.2.4",
+		"next": "^14.2.5",
 		"next-sanity": "^9.4.2",
 		"next-sanity-image": "^6.1.1",
 		"prettier-plugin-tailwindcss": "^0.6.5",
