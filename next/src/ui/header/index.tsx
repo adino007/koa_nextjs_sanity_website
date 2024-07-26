@@ -25,13 +25,13 @@ export default async function Header() {
 					<Link
 						className={cn(
 							'h3 md:h2 inline-block',
-							logo?.image && 'max-w-[250px]',
+							logo?.image && 'max-w-[550px]',
 						)}
 						href="/"
 					>
 						{logoImage ? (
 							<Img
-								className="inline-block max-h-[1.2em] w-auto"
+								className="inline-block max-h-[3.4em] w-auto"
 								image={logoImage}
 								alt={logo?.name || title}
 							/>

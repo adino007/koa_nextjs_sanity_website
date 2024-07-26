@@ -10,11 +10,13 @@ import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import '@/styles/app.css'
 
+
 export const metadata: Metadata = {
 	icons: {
 		icon: `https://fav.farm/🖤`,
 	},
 }
+
 
 export default async function RootLayout({
 	children,
