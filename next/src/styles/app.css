@@ -68,11 +68,11 @@
 	}
 
 	.h5 {
-		@apply _h;
+		@apply _h text-base;
 	}
 
 	.h6 {
-		@apply _h;
+		@apply _h text-sm;
 	}
 
 	.technical {
