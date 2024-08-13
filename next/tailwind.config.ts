@@ -11,7 +11,9 @@ const config: Config = {
 
 				accent: '#000',
 			},
-			fontFamily: {},
+			fontFamily: {
+				sans_serif: ['New Amsterdam', 'sans-serif'],
+			},
 			maxHeight: {
 				fold: 'calc(100svh - var(--header-height))',
 			},

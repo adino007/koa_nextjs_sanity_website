@@ -10,13 +10,11 @@ import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import '@/styles/app.css'
 
-
 export const metadata: Metadata = {
 	icons: {
 		icon: `https://fav.farm/🖤`,
 	},
 }
-
 
 export default async function RootLayout({
 	children,
@@ -27,7 +25,7 @@ export default async function RootLayout({
 		<html lang="en">
 			{/* <GoogleTagManager gtmId='' /> */}
 
-			<body className="bg-canvas text-ink">
+			<body className="font-sans_serif bg-canvas text-ink">
 				<SkipToContent />
 				<Announcement />
 				<Header />
