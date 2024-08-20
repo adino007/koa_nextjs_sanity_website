@@ -13,6 +13,7 @@ import { vercelWidget } from 'sanity-plugin-dashboard-widget-vercel'
 import { visionTool } from '@sanity/vision'
 import { codeInput } from '@sanity/code-input'
 import { schemaTypes } from './schemas'
+import { muxInput } from 'sanity-plugin-mux-input'
 
 const singletonTypes = ['site']
 
@@ -43,6 +44,7 @@ export default defineConfig({
 		}),
 		visionTool({ title: 'GROQ' }),
 		codeInput(),
+		muxInput(),
 	],
 
 	scheduledPublishing: {

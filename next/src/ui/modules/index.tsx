@@ -8,6 +8,7 @@ import FlagList from './FlagList'
 import Hero from './Hero'
 import HeroSplit from './HeroSplit'
 import HeroSaaS from './HeroSaaS'
+import HeroVideo from './HeroVideo'
 import LogoList from './LogoList'
 import PricingList from './PricingList'
 import RichtextModule from './RichtextModule'
@@ -49,6 +50,8 @@ export default function Modules({
 						return <HeroSplit {...module} key={module._key} />
 					case 'hero.saas':
 						return <HeroSaaS {...module} key={module._key} />
+					case 'hero.video':
+						return <HeroVideo {...module} key={module._key} />
 					case 'logo-list':
 						return <LogoList {...module} key={module._key} />
 					case 'pricing-list':

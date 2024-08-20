@@ -27,6 +27,7 @@ import customHtml from './modules/custom-html'
 import flagList from './modules/flag-list'
 import hero from './modules/hero'
 import heroSaas from './modules/hero.saas'
+import heroVideo from './modules/hero.video'
 import HeroSplit from './modules/hero.split'
 import logoList from './modules/logo-list'
 import pricingList from './modules/pricing-list'
@@ -66,6 +67,7 @@ export const schemaTypes = [
 	flagList,
 	hero,
 	heroSaas,
+	heroVideo,
 	HeroSplit,
 	logoList,
 	pricingList,

@@ -86,7 +86,7 @@
 	}
 
 	.text-gradient {
-		@apply bg-gradient-to-br from-accent/5 to-accent bg-clip-text text-transparent;
+		/* @apply bg-gradient-to-br from-accent/5 to-accent bg-clip-text text-transparent; */
 	}
 
 	/* ctas, links */
