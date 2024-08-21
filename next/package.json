@@ -17,6 +17,7 @@
 		"@vercel/analytics": "^1.3.1",
 		"@vercel/speed-insights": "^1.0.12",
 		"clsx": "^2.1.1",
+		"cors": "^2.8.5",
 		"feed": "^4.2.2",
 		"groq": "^3.49.0",
 		"next": "^14.2.5",

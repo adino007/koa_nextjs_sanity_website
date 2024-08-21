@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils'
 import { stegaClean } from '@sanity/client/stega'
 import css from './Hero.module.css'
 import MuxPlayer from '@mux/mux-player-react' // Use MuxPlayer for Mux video
-import { useEffect } from 'react' // Import useEffect for debugging playback
+import { useEffect, useState } from 'react' // Import useEffect for debugging playback
 
 export default function HeroVideo({
 	pretitle,
@@ -46,6 +46,9 @@ export default function HeroVideo({
 		}
 	}, [muxVideo, hasVideo])
 
+	const [error, setError] = useState(null)
+	const proxyUrl = `/api/mux-video?playbackId=${muxVideo.playbackId}`
+
 	return (
 		<section
 			className={cn(
@@ -54,17 +57,26 @@ export default function HeroVideo({
 			)}
 		>
 			{/* Background Video */}
-			{hasVideo && (
-				<MuxPlayer
-					playbackId={muxVideo.playbackId} // Use playbackId from Mux video
-					autoPlay
-					loop
-					muted
-					playsInline
-					className="absolute inset-0 h-full w-full object-cover"
-					onError={(e) => console.error('Video error:', e)}
-				/>
-			)}
+			<div>
+				{error ? (
+					<div className="error-message">
+						Video could not be loaded: {error}
+					</div>
+				) : (
+					<MuxPlayer
+						src={proxyUrl} // Use the proxy URL here
+						autoPlay
+						loop
+						muted
+						playsInline
+						className="absolute inset-0 h-full w-full object-cover"
+						onError={(e) => {
+							console.error('Video error:', e)
+							setError('Video failed to load')
+						}}
+					/>
+				)}
+			</div>
 
 			{/* Background Image */}
 			{bgImage?.asset && !hasVideo && (
