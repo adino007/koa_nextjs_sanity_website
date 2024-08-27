@@ -50,7 +50,11 @@ export default async function handler(
 		}
 
 		// Stream the video content back to the client
-		response.body.pipe(res)
+		if (response.body) {
+			response.body.pipe(res)
+		} else {
+			throw new Error('Response body is null')
+		}
 	} catch (error) {
 		res
 			.status(500)
