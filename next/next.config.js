@@ -1,5 +1,3 @@
-const { withNextVideo } = require('next-video/process')
-
 const { createClient } = require('next-sanity')
 const groq = require('groq')
 
@@ -35,5 +33,3 @@ const nextConfig = {
 	// 	},
 	// },
 }
-
-module.exports = withNextVideo(nextConfig, { folder: './public/videos' })
