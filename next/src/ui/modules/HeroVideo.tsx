@@ -47,7 +47,17 @@ export default function HeroVideo({
 	}, [muxVideo, hasVideo])
 
 	const [error, setError] = useState<string | null>(null)
-	const proxyUrl = `/api/mux-video?playbackId=${muxVideo?.playbackId ?? ''}`
+	let proxyUrl: string | null = null
+
+	if (muxVideo?.playbackId) {
+		try {
+			proxyUrl = `/api/mux-video?playbackId=${muxVideo.playbackId}`
+		} catch (e) {
+			setError('Invalid playback ID')
+		}
+	} else {
+		setError('No valid playback ID found')
+	}
 
 	return (
 		<section
