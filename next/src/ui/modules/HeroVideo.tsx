@@ -46,8 +46,8 @@ export default function HeroVideo({
 		}
 	}, [muxVideo, hasVideo])
 
-	const [error, setError] = useState(null)
-	const proxyUrl = `/api/mux-video?playbackId=${muxVideo.playbackId}`
+	const [error, setError] = useState<string | null>(null)
+	const proxyUrl = `/api/mux-video?playbackId=${muxVideo?.playbackId ?? ''}`
 
 	return (
 		<section
