@@ -31,12 +31,18 @@ export default async function handler(
 	// Run the CORS middleware
 	await runMiddleware(req, res, cors)
 
-	const { playbackId } = req.query
+	let { playbackId } = req.query
+	console.log('Original playbackId:', playbackId)
 
-	// Validate the playbackId
-	if (!playbackId) {
-		return res.status(400).json({ error: 'Playback ID is required' })
+	// Validate and sanitize the playbackId
+	if (!playbackId || typeof playbackId !== 'string') {
+		return res.status(400).json({ error: 'Invalid Playback ID' })
 	}
+
+	playbackId = playbackId.trim() // Remove any whitespace
+	playbackId = playbackId.replace(/[^\w-]/g, '') // Remove any non-alphanumeric characters
+
+	console.log('Sanitized playbackId:', playbackId)
 
 	try {
 		// Fetch the video from Mux

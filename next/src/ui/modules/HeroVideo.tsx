@@ -36,28 +36,26 @@ export default function HeroVideo({
 	const hasImage = !!bgImage?.asset
 	const hasVideo = !!muxVideo?.playbackId
 
-	// Debugging: Log the muxVideo object to the console
+	const [error, setError] = useState<string | null>(null)
+
+	// Sanitize playbackId to remove any unwanted characters
+	const sanitizePlaybackId = (id: string): string => {
+		// Regular expression to match valid characters
+		return id.replace(/[^a-zA-Z0-9-_]/g, '')
+	}
+
+	const sanitizedPlaybackId = hasVideo
+		? sanitizePlaybackId(muxVideo.playbackId)
+		: null
+
 	useEffect(() => {
-		console.log('muxVideo:', muxVideo)
-		if (hasVideo) {
-			console.log('Playback ID:', muxVideo.playbackId)
+		if (sanitizedPlaybackId) {
+			console.log('Sanitized Playback ID:', sanitizedPlaybackId)
 		} else {
 			console.warn('No valid video found or playbackId is missing.')
+			setError('Invalid Playback ID')
 		}
-	}, [muxVideo, hasVideo])
-
-	const [error, setError] = useState<string | null>(null)
-	let proxyUrl: string | null = null
-
-	if (muxVideo?.playbackId) {
-		try {
-			proxyUrl = `/api/mux-video?playbackId=${muxVideo.playbackId}`
-		} catch (e) {
-			setError('Invalid playback ID')
-		}
-	} else {
-		setError('No valid playback ID found')
-	}
+	}, [sanitizedPlaybackId])
 
 	return (
 		<section
@@ -67,19 +65,19 @@ export default function HeroVideo({
 			)}
 		>
 			{/* Background Video */}
-			<div>
+			<div className={css.muxPlayerWrapper}>
 				{error ? (
 					<div className="error-message">
 						Video could not be loaded: {error}
 					</div>
 				) : (
 					<MuxPlayer
-						src={proxyUrl} // Use the proxy URL here
+						src={`https://stream.mux.com/${sanitizedPlaybackId}.m3u8`} // Use sanitized playback ID
 						autoPlay
 						loop
 						muted
 						playsInline
-						className="absolute inset-0 h-full w-full object-cover"
+						className="h-full w-full object-contain" // Adjusted to fit within the component
 						onError={(e) => {
 							console.error('Video error:', e)
 							setError('Video failed to load')
