@@ -2,7 +2,7 @@
 	content: '';
 	position: absolute;
 	inset: -50%;
-	z-index: -1;
+	z-index: 1;
 	mask-image: radial-gradient(ellipse at center, black 25%, transparent 50%);
 
 	@apply backdrop-brightness-75;
@@ -40,4 +40,14 @@
 	/* Target a specific section by prefixing the CSS var with (top|center|bottom) */
 	--center-controls: none;
 	--bottom-play-button: none;
+
+	/* Video Resizing and Positioning */
+	position: relative;
+	width: 100%;
+	height: 100%;
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: cover; /* Ensures the video covers the container */
+	overflow: hidden; /* Ensures content stays within the component */
+	z-index: 1; /* Ensure this is lower than the header's z-index */                                                                                                                       
 }

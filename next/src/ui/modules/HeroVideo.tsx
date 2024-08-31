@@ -14,8 +14,6 @@ export default function HeroVideo({
 	pretitle,
 	content,
 	ctas,
-	bgImage,
-	bgImageMobile,
 	muxVideo, // This now contains the resolved asset with playbackId
 	textAlign = 'center',
 	alignItems,
@@ -23,8 +21,6 @@ export default function HeroVideo({
 	pretitle: string
 	content: any
 	ctas: Sanity.CTA[]
-	bgImage: Sanity.Image
-	bgImageMobile: Sanity.Image
 	muxVideo: {
 		playbackId: string
 		status: string
@@ -33,7 +29,6 @@ export default function HeroVideo({
 	textAlign: React.CSSProperties['textAlign']
 	alignItems: React.CSSProperties['alignItems']
 }>) {
-	const hasImage = !!bgImage?.asset
 	const hasVideo = !!muxVideo?.playbackId
 
 	const [error, setError] = useState<string | null>(null)
@@ -60,7 +55,7 @@ export default function HeroVideo({
 	return (
 		<section
 			className={cn(
-				(hasImage || hasVideo) &&
+				hasVideo &&
 					'grid overflow-hidden bg-ink text-canvas *:col-span-full *:row-span-full',
 			)}
 		>
@@ -77,7 +72,7 @@ export default function HeroVideo({
 						loop
 						muted
 						playsInline
-						className="h-full w-full object-contain" // Adjusted to fit within the component
+						className="h-full w-full object-cover" // Adjusted to fit within the component
 						onError={(e) => {
 							console.error('Video error:', e)
 							setError('Video failed to load')
@@ -86,26 +81,15 @@ export default function HeroVideo({
 				)}
 			</div>
 
-			{/* Background Image */}
-			{bgImage?.asset && !hasVideo && (
-				<picture>
-					<Source image={bgImageMobile} imageWidth={1200} />
-					<Img
-						className="size-full max-h-fold object-cover"
-						image={bgImage}
-						imageWidth={1800}
-						draggable={false}
-					/>
-				</picture>
-			)}
-
 			{content && (
-				<div className="section relative z-10 flex w-full flex-col">
+				<div className="section relative z-10 flex h-full w-full flex-col items-center justify-center text-center">
+					{' '}
+					{/* Center content horizontally and vertically */}
 					<div
 						className={cn(
 							'richtext relative isolate max-w-xl [&_:is(h1,h2)]:text-balance',
-							(hasImage || hasVideo) && 'text-shadow',
-							hasImage && css.txt,
+							hasVideo && 'text-shadow',
+							css.txt,
 							{
 								'mb-8': stegaClean(alignItems) === 'start',
 								'my-auto': stegaClean(alignItems) === 'center',
@@ -119,9 +103,7 @@ export default function HeroVideo({
 						)}
 						style={{ textAlign: stegaClean(textAlign) }}
 					>
-						<Pretitle
-							className={cn((hasImage || hasVideo) && 'text-canvas/70')}
-						>
+						<Pretitle className={cn(hasVideo && 'text-canvas/70')}>
 							{pretitle}
 						</Pretitle>
 						<PortableText value={content} />

@@ -32,37 +32,6 @@ export default defineType({
 			title: 'Background Video',
 			description: 'Upload or select a video from Mux',
 		}),
-		defineField({
-			name: 'image',
-			type: 'image',
-			title: 'Background Image',
-			options: {
-				hotspot: true,
-			},
-			fields: [
-				defineField({
-					name: 'alt',
-					type: 'string',
-					title: 'Alternative text',
-				}),
-				defineField({
-					name: 'faded',
-					type: 'boolean',
-					title: 'Faded',
-					initialValue: true,
-				}),
-				defineField({
-					name: 'loading',
-					type: 'string',
-					title: 'Loading',
-					options: {
-						layout: 'radio',
-						list: ['lazy', 'eager'],
-					},
-					initialValue: 'lazy',
-				}),
-			],
-		}),
 	],
 	preview: {
 		select: {
