@@ -1,6 +1,5 @@
 'use client' // Ensure this component is treated as a Client Component
 
-import Img, { Source } from '@/ui/Img'
 import { PortableText } from '@portabletext/react'
 import CTAList from '@/ui/CTAList'
 import Pretitle from '@/ui/Pretitle'
@@ -56,7 +55,7 @@ export default function HeroVideo({
 		<section
 			className={cn(
 				hasVideo &&
-					'grid overflow-hidden bg-ink text-canvas *:col-span-full *:row-span-full',
+					'-mt-28 grid overflow-hidden bg-ink text-canvas *:col-span-full *:row-span-full',
 			)}
 		>
 			{/* Background Video */}
@@ -82,7 +81,7 @@ export default function HeroVideo({
 			</div>
 
 			{content && (
-				<div className="section relative z-10 flex h-full w-full flex-col items-center justify-center text-center">
+				<div className="section relative z-10 flex h-full w-full flex-col">
 					{' '}
 					{/* Center content horizontally and vertically */}
 					<div
