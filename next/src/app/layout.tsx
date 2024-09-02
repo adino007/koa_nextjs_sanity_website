@@ -34,8 +34,8 @@ export default async function RootLayout({
 				</main>
 				<Footer />
 
-				<Analytics />
 				<SpeedInsights />
+				<Analytics />
 				{draftMode().isEnabled && <VisualEditing />}
 			</body>
 		</html>
