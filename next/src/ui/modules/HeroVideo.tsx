@@ -10,14 +10,12 @@ import MuxPlayer from '@mux/mux-player-react' // Use MuxPlayer for Mux video
 import { useEffect, useState } from 'react' // Import useEffect for debugging playback
 
 export default function HeroVideo({
-	pretitle,
 	content,
 	ctas,
 	muxVideo, // This now contains the resolved asset with playbackId
 	textAlign = 'center',
 	alignItems,
 }: Partial<{
-	pretitle: string
 	content: any
 	ctas: Sanity.CTA[]
 	muxVideo: {
@@ -54,8 +52,9 @@ export default function HeroVideo({
 	return (
 		<section
 			className={cn(
+				'videosection',
 				hasVideo &&
-					'-mt-28 grid overflow-hidden bg-ink text-canvas *:col-span-full *:row-span-full',
+					'grid overflow-hidden bg-ink text-canvas *:col-span-full *:row-span-full',
 			)}
 		>
 			{/* Background Video */}
@@ -102,9 +101,6 @@ export default function HeroVideo({
 						)}
 						style={{ textAlign: stegaClean(textAlign) }}
 					>
-						<Pretitle className={cn(hasVideo && 'text-canvas/70')}>
-							{pretitle}
-						</Pretitle>
 						<PortableText value={content} />
 						<CTAList
 							ctas={ctas}

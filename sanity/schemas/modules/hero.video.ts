@@ -1,6 +1,5 @@
 import { defineField, defineType } from 'sanity'
 import { TfiLayoutCtaCenter } from 'react-icons/tfi'
-import { muxInput } from 'sanity-plugin-mux-input'
 import { getBlockText } from '../../src/utils'
 import {
 	textAlign,
@@ -20,12 +19,6 @@ export default defineType({
 	],
 	fieldsets: [alignmentFieldset],
 	fields: [
-		defineField({
-			name: 'pretitle',
-			type: 'string',
-			title: 'Pretitle',
-			group: 'content',
-		}),
 		defineField({
 			name: 'content',
 			type: 'array',

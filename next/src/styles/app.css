@@ -75,6 +75,19 @@
 	.h6 {
 		@apply _h text-sm;
 	}
+	.videosection {
+		@apply -mt-28;
+	}
+
+	/* Tailwind CSS responsive classes */
+	@media (max-width: 640px) {
+		.h1 {
+			@apply text-3xl;
+		}
+		.videosection {
+			@apply mt-0;
+		}
+	}
 
 	.technical {
 		text-transform: uppercase;
