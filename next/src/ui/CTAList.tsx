@@ -1,5 +1,8 @@
+'use client'
+
 import { cn } from '@/lib/utils'
 import CTA from './CTA'
+import { useEffect } from 'react'
 
 export default function CTAList({
 	ctas,
@@ -7,6 +10,20 @@ export default function CTAList({
 }: React.HTMLAttributes<HTMLParagraphElement> & {
 	ctas?: Sanity.CTA[]
 }) {
+	useEffect(() => {
+		if (ctas && ctas.length > 0) {
+			ctas.forEach((cta, index) => {
+				console.log(`CTA ${index}:`, cta)
+				console.log(`CTA ${index} Link:`, cta.link)
+				if (!cta.link || !cta.link.internal) {
+					console.warn(`CTA ${index} is missing a valid internal link.`)
+				}
+			})
+		} else {
+			console.warn('No CTAs provided to HeroVideo component.')
+		}
+	}, [ctas])
+
 	if (!ctas?.length) return null
 
 	return (

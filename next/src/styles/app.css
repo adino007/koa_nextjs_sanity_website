@@ -75,6 +75,7 @@
 	.h6 {
 		@apply _h text-sm;
 	}
+
 	.videosection {
 		@apply -mt-28;
 	}

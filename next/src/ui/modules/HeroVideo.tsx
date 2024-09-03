@@ -1,21 +1,24 @@
-'use client' // Ensure this component is treated as a Client Component
+'use client'
 
 import { PortableText } from '@portabletext/react'
 import CTAList from '@/ui/CTAList'
-import Pretitle from '@/ui/Pretitle'
 import { cn } from '@/lib/utils'
 import { stegaClean } from '@sanity/client/stega'
+import Pretitle from '@/ui/Pretitle'
 import css from './Hero.module.css'
-import MuxPlayer from '@mux/mux-player-react' // Use MuxPlayer for Mux video
-import { useEffect, useState } from 'react' // Import useEffect for debugging playback
+import MuxPlayer from '@mux/mux-player-react'
+import { useEffect, useState } from 'react'
+import CTA from '../CTA'
 
 export default function HeroVideo({
+	pretitle,
 	content,
 	ctas,
-	muxVideo, // This now contains the resolved asset with playbackId
+	muxVideo,
 	textAlign = 'center',
 	alignItems,
 }: Partial<{
+	pretitle: string
 	content: any
 	ctas: Sanity.CTA[]
 	muxVideo: {
@@ -32,7 +35,6 @@ export default function HeroVideo({
 
 	// Sanitize playbackId to remove any unwanted characters
 	const sanitizePlaybackId = (id: string): string => {
-		// Regular expression to match valid characters
 		return id.replace(/[^a-zA-Z0-9-_]/g, '')
 	}
 
@@ -48,6 +50,25 @@ export default function HeroVideo({
 			setError('Invalid Playback ID')
 		}
 	}, [sanitizedPlaybackId])
+
+	// CTAs Testing
+	useEffect(() => {
+		if (ctas && ctas.length > 0) {
+			ctas.forEach((cta, index) => {
+				console.log(`CTA ${index}:`, cta)
+				console.log(`CTA ${index} Link:`, cta.link)
+
+				// Checking the link type correctly
+				if (!cta.link) {
+					console.warn(`CTA ${index} is missing a link.`)
+				} else if (!cta.link.internal && cta.link.type !== 'external') {
+					console.warn(`CTA ${index} is missing a valid internal link.`)
+				}
+			})
+		} else {
+			console.warn('No CTAs provided to HeroVideo component.')
+		}
+	}, [ctas])
 
 	return (
 		<section
@@ -65,12 +86,12 @@ export default function HeroVideo({
 					</div>
 				) : (
 					<MuxPlayer
-						src={`https://stream.mux.com/${sanitizedPlaybackId}.m3u8`} // Use sanitized playback ID
+						src={`https://stream.mux.com/${sanitizedPlaybackId}.m3u8`}
 						autoPlay
 						loop
 						muted
 						playsInline
-						className="h-full w-full object-cover" // Adjusted to fit within the component
+						className="h-full w-full object-cover"
 						onError={(e) => {
 							console.error('Video error:', e)
 							setError('Video failed to load')
@@ -81,8 +102,6 @@ export default function HeroVideo({
 
 			{content && (
 				<div className="section relative z-10 flex h-full w-full flex-col">
-					{' '}
-					{/* Center content horizontally and vertically */}
 					<div
 						className={cn(
 							'richtext relative isolate max-w-xl [&_:is(h1,h2)]:text-balance',
@@ -101,6 +120,9 @@ export default function HeroVideo({
 						)}
 						style={{ textAlign: stegaClean(textAlign) }}
 					>
+						<Pretitle className={cn(hasVideo && 'text-canvas/70')}>
+							{pretitle}
+						</Pretitle>
 						<PortableText value={content} />
 						<CTAList
 							ctas={ctas}

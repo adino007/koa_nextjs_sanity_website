@@ -20,16 +20,20 @@ export default defineType({
 	fieldsets: [alignmentFieldset],
 	fields: [
 		defineField({
+			name: 'pretitle',
+			type: 'string',
+			group: 'content',
+		}),
+		defineField({
 			name: 'content',
 			type: 'array',
-			title: 'Content',
 			of: [{ type: 'block' }],
 			group: 'content',
 		}),
 		defineField({
 			name: 'ctas',
-			type: 'array',
 			title: 'Call-to-actions',
+			type: 'array',
 			of: [{ type: 'cta' }],
 			group: 'content',
 		}),

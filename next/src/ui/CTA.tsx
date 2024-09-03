@@ -1,7 +1,10 @@
+'use client'
+
 import Link from 'next/link'
 import processUrl from '@/lib/processUrl'
 import { cn } from '@/lib/utils'
 import { stegaClean } from '@sanity/client/stega'
+import { useEffect } from 'react'
 
 export default function CTA({
 	link,
@@ -10,6 +13,13 @@ export default function CTA({
 	children,
 	...rest
 }: Sanity.CTA & React.HTMLAttributes<HTMLAnchorElement>) {
+	useEffect(() => {
+		console.log('CTA Link:', link)
+		if (link?.type === 'internal' && !link.internal) {
+			console.warn('CTA is marked as internal but has no valid internal link.')
+		}
+	}, [link])
+
 	const props = {
 		className: cn(style, className) || undefined,
 		children:
