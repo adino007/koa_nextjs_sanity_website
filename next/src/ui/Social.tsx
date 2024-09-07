@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils'
 import {
 	FaFacebookF,
 	FaGithub,
+	FaSoundcloud,
 	FaInstagram,
 	FaLinkedinIn,
 	FaTiktok,
@@ -12,6 +13,7 @@ import {
 	FaYoutube,
 } from 'react-icons/fa6'
 import { IoIosLink } from 'react-icons/io'
+import { SiLinktree } from 'react-icons/si' // Add this line to import SiLinktree
 
 export default async function Social({
 	className,
@@ -53,6 +55,10 @@ function Icon({
 		<FaFacebookF {...props} />
 	) : url?.includes('github.com') ? (
 		<FaGithub {...props} />
+	) : url?.includes('linktr.ee') ? (
+		<SiLinktree {...props} />
+	) : url?.includes('soundcloud.com') ? (
+		<FaSoundcloud {...props} />
 	) : url?.includes('instagram.com') ? (
 		<FaInstagram {...props} />
 	) : url?.includes('linkedin.com') ? (

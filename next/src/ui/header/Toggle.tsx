@@ -1,9 +1,15 @@
+import { IoCloseCircleOutline, IoReorderThreeOutline } from 'react-icons/io5'
+
 export default function Toggle() {
 	return (
 		<label className="[grid-area:toggle] md:hidden">
 			<input id="header-open" type="checkbox" hidden />
-			<span className="text-2xl font-bold header-closed:hidden">X</span>
-			<span className="text-6xl header-open:hidden">≡</span>
+			<span className="text-4xl font-bold header-closed:hidden">
+				<IoCloseCircleOutline />
+			</span>
+			<span className="text-5xl header-open:hidden">
+				<IoReorderThreeOutline />
+			</span>
 		</label>
 	)
 }

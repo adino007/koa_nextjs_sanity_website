@@ -4,14 +4,11 @@ import { PortableText } from '@portabletext/react'
 import CTAList from '@/ui/CTAList'
 import { cn } from '@/lib/utils'
 import { stegaClean } from '@sanity/client/stega'
-import Pretitle from '@/ui/Pretitle'
 import css from './Hero.module.css'
 import MuxPlayer from '@mux/mux-player-react'
 import { useEffect, useState } from 'react'
-import CTA from '../CTA'
 
 export default function HeroVideo({
-	pretitle,
 	content,
 	ctas,
 	muxVideo,
@@ -51,24 +48,24 @@ export default function HeroVideo({
 		}
 	}, [sanitizedPlaybackId])
 
-	// CTAs Testing
-	useEffect(() => {
-		if (ctas && ctas.length > 0) {
-			ctas.forEach((cta, index) => {
-				console.log(`CTA ${index}:`, cta)
-				console.log(`CTA ${index} Link:`, cta.link)
+	// // CTAs Testing
+	// useEffect(() => {
+	// 	if (ctas && ctas.length > 0) {
+	// 		ctas.forEach((cta, index) => {
+	// 			console.log(`CTA ${index}:`, cta)
+	// 			console.log(`CTA ${index} Link:`, cta.link)
 
-				// Checking the link type correctly
-				if (!cta.link) {
-					console.warn(`CTA ${index} is missing a link.`)
-				} else if (!cta.link.internal && cta.link.type !== 'external') {
-					console.warn(`CTA ${index} is missing a valid internal link.`)
-				}
-			})
-		} else {
-			console.warn('No CTAs provided to HeroVideo component.')
-		}
-	}, [ctas])
+	// 			// Checking the link type correctly
+	// 			if (!cta.link) {
+	// 				console.warn(`CTA ${index} is missing a link.`)
+	// 			} else if (!cta.link.internal && cta.link.type !== 'external') {
+	// 				console.warn(`CTA ${index} is missing a valid internal link.`)
+	// 			}
+	// 		})
+	// 	} else {
+	// 		console.warn('No CTAs provided to HeroVideo component.')
+	// 	}
+	// }, [ctas])
 
 	return (
 		<section
@@ -120,9 +117,6 @@ export default function HeroVideo({
 						)}
 						style={{ textAlign: stegaClean(textAlign) }}
 					>
-						<Pretitle className={cn(hasVideo && 'text-canvas/70')}>
-							{pretitle}
-						</Pretitle>
 						<PortableText value={content} />
 						<CTAList
 							ctas={ctas}

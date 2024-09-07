@@ -20,11 +20,6 @@ export default defineType({
 	fieldsets: [alignmentFieldset],
 	fields: [
 		defineField({
-			name: 'pretitle',
-			type: 'string',
-			group: 'content',
-		}),
-		defineField({
 			name: 'content',
 			type: 'array',
 			of: [{ type: 'block' }],
