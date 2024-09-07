@@ -14,12 +14,12 @@ export default async function Footer() {
 		<footer className="bg-ink text-center font-moncheri uppercase text-canvas">
 			<div className="section border-b border-canvas/20">
 				<div className="mx-auto max-w-screen-xl space-y-8">
-					<div className="flex flex-wrap justify-between gap-x-12 gap-y-8">
+					<div className="flex flex-wrap justify-center gap-x-12 gap-y-8">
 						<div className="sm:h4 flex flex-col items-center gap-3 self-start max-sm:mx-auto">
 							<Link className="h3 md:h2 max-w-max" href="/">
 								{logoImage ? (
 									<Img
-										className="max-h-[2.5em] w-auto"
+										className="max-h-[2em] w-auto"
 										image={logoImage}
 										alt={logo?.name || title}
 									/>
