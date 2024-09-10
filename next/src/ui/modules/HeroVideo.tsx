@@ -1,12 +1,11 @@
-'use client'
-
 import { PortableText } from '@portabletext/react'
 import CTAList from '@/ui/CTAList'
 import { cn } from '@/lib/utils'
 import { stegaClean } from '@sanity/client/stega'
 import css from './Hero.module.css'
-import MuxPlayer from '@mux/mux-player-react'
-import { useEffect, useState } from 'react'
+import dynamic from 'next/dynamic'
+
+const MuxPlayer = dynamic(() => import('@mux/mux-player-react'), { ssr: false })
 
 export default function HeroVideo({
 	content,
@@ -28,8 +27,6 @@ export default function HeroVideo({
 }>) {
 	const hasVideo = !!muxVideo?.playbackId
 
-	const [error, setError] = useState<string | null>(null)
-
 	// Sanitize playbackId to remove any unwanted characters
 	const sanitizePlaybackId = (id: string): string => {
 		return id.replace(/[^a-zA-Z0-9-_]/g, '')
@@ -39,33 +36,8 @@ export default function HeroVideo({
 		? sanitizePlaybackId(muxVideo.playbackId)
 		: null
 
-	useEffect(() => {
-		if (sanitizedPlaybackId) {
-			console.log('Sanitized Playback ID:', sanitizedPlaybackId)
-		} else {
-			console.warn('No valid video found or playbackId is missing.')
-			setError('Invalid Playback ID')
-		}
-	}, [sanitizedPlaybackId])
-
-	// // CTAs Testing
-	// useEffect(() => {
-	// 	if (ctas && ctas.length > 0) {
-	// 		ctas.forEach((cta, index) => {
-	// 			console.log(`CTA ${index}:`, cta)
-	// 			console.log(`CTA ${index} Link:`, cta.link)
-
-	// 			// Checking the link type correctly
-	// 			if (!cta.link) {
-	// 				console.warn(`CTA ${index} is missing a link.`)
-	// 			} else if (!cta.link.internal && cta.link.type !== 'external') {
-	// 				console.warn(`CTA ${index} is missing a valid internal link.`)
-	// 			}
-	// 		})
-	// 	} else {
-	// 		console.warn('No CTAs provided to HeroVideo component.')
-	// 	}
-	// }, [ctas])
+	// Log the ctas to ensure they are being passed correctly
+	console.log('CTAs in HeroVideo:', ctas)
 
 	return (
 		<section
@@ -77,11 +49,7 @@ export default function HeroVideo({
 		>
 			{/* Background Video */}
 			<div className={css.muxPlayerWrapper}>
-				{error ? (
-					<div className="error-message">
-						Video could not be loaded: {error}
-					</div>
-				) : (
+				{hasVideo && sanitizedPlaybackId && (
 					<MuxPlayer
 						src={`https://stream.mux.com/${sanitizedPlaybackId}.m3u8`}
 						autoPlay
@@ -89,10 +57,6 @@ export default function HeroVideo({
 						muted
 						playsInline
 						className="h-full w-full object-cover"
-						onError={(e) => {
-							console.error('Video error:', e)
-							setError('Video failed to load')
-						}}
 					/>
 				)}
 			</div>
@@ -102,7 +66,7 @@ export default function HeroVideo({
 					<div
 						className={cn(
 							'richtext relative isolate max-w-xl [&_:is(h1,h2)]:text-balance',
-							hasVideo && 'text-shadow',
+							hasVideo && 'text-shadow mb-12',
 							css.txt,
 							{
 								'mb-8': stegaClean(alignItems) === 'start',
@@ -118,14 +82,20 @@ export default function HeroVideo({
 						style={{ textAlign: stegaClean(textAlign) }}
 					>
 						<PortableText value={content} />
-						<CTAList
-							ctas={ctas}
-							className={cn('!mt-4', {
-								'justify-start': stegaClean(textAlign) === 'left',
-								'justify-center': stegaClean(textAlign) === 'center',
-								'justify-end': stegaClean(textAlign) === 'right',
-							})}
-						/>
+
+						{/* Pass ctas to CTAList and log the result */}
+						{ctas && ctas.length > 0 ? (
+							<CTAList
+								ctas={ctas}
+								className={cn('!mt-4', {
+									'justify-start': stegaClean(textAlign) === 'left',
+									'justify-center': stegaClean(textAlign) === 'center',
+									'justify-end': stegaClean(textAlign) === 'right',
+								})}
+							/>
+						) : (
+							<p>No CTAs provided</p>
+						)}
 					</div>
 				</div>
 			)}

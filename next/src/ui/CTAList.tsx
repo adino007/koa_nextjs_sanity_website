@@ -24,7 +24,10 @@ export default function CTAList({
 		}
 	}, [ctas])
 
-	if (!ctas?.length) return null
+	if (!ctas?.length) {
+		console.warn('No CTAs provided to CTAList component.')
+		return null
+	}
 
 	return (
 		<div className={cn('flex flex-wrap items-center gap-[.5em]', className)}>

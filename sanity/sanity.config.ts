@@ -10,6 +10,7 @@ import {
 	projectUsersWidget,
 } from '@sanity/dashboard'
 import { vercelWidget } from 'sanity-plugin-dashboard-widget-vercel'
+import { vercelDeployTool } from 'sanity-plugin-vercel-deploy'
 import { visionTool } from '@sanity/vision'
 import { codeInput } from '@sanity/code-input'
 import { schemaTypes } from './schemas'
@@ -45,6 +46,7 @@ export default defineConfig({
 		visionTool({ title: 'GROQ' }),
 		codeInput(),
 		muxInput(),
+		vercelDeployTool(),
 	],
 
 	scheduledPublishing: {
@@ -70,3 +72,9 @@ export default defineConfig({
 				: input,
 	},
 })
+dashboardTool({
+        widgets: [
+          vercelWidget({ layout: { width: "full" /* default and reccomended */ } }),
+        ],
+    }
+)
