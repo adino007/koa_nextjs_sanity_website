@@ -101,4 +101,6 @@ export default function HeroVideo({
 			)}
 		</section>
 	)
+	// Log the ctas to ensure they are being passed correctly
+	console.log('CTAs in HeroVideo after return:', ctas)
 }
