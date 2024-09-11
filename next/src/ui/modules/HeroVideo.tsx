@@ -44,11 +44,11 @@ export default function HeroVideo({
 			className={cn(
 				'videosection',
 				hasVideo &&
-					'grid overflow-hidden bg-ink text-canvas *:col-span-full *:row-span-full',
+					'relative m-0 -mt-32 grid h-screen w-full overflow-hidden bg-ink object-cover p-0 text-canvas *:col-span-full *:row-span-full sm:-mt-32',
 			)}
 		>
 			{/* Background Video */}
-			<div className={css.muxPlayerWrapper}>
+			<div className={cn(css.muxPlayerSettings, 'm-0 p-0')}>
 				{hasVideo && sanitizedPlaybackId && (
 					<MuxPlayer
 						src={`https://stream.mux.com/${sanitizedPlaybackId}.m3u8`}
@@ -62,7 +62,7 @@ export default function HeroVideo({
 			</div>
 
 			{content && (
-				<div className="section relative z-10 flex h-full w-full flex-col">
+				<div className="section relative z-10 flex h-full w-full">
 					<div
 						className={cn(
 							'richtext relative isolate max-w-xl [&_:is(h1,h2)]:text-balance',

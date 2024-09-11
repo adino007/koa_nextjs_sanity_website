@@ -76,11 +76,16 @@
 		@apply _h text-sm;
 	}
 
+	/* 
 	.videosection {
 		@apply -mt-44;
+		display: grid;
+		grid-template-rows: 1fr;
+		grid-template-columns: 1fr;
+		position: relative;
+		overflow: hidden;
 	}
-
-	/* Tailwind CSS responsive classes */
+ 
 	@media (max-width: 640px) {
 		.h1 {
 			@apply text-3xl;
@@ -88,7 +93,8 @@
 		.videosection {
 			@apply -mt-28;
 		}
-	}
+	} 
+*/
 
 	.technical {
 		text-transform: uppercase;
@@ -107,17 +113,30 @@
 	/* ctas, links */
 
 	._btn {
-		display: inline-flex;
+		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding: 0.5em 1em;
-		text-align: center;
-		text-shadow: none;
+
+		padding: 1rem 1.5em;
+		margin: 0.5rem 0.5rem;
+		background-color: transparent;
+		border: solid white 1px;
+		font-size: 0.8rem;
+		color: white;
+		transition: 0.25s background-color;
 		z-index: 1;
 	}
 
+	/* app.css */
+	.bg-hover {
+		background: white;
+		opacity: 85%;
+		color: black;
+		transition: background 0.25s;
+	}
+
 	.action {
-		@apply _btn frosted-glass text-balance rounded border border-transparent bg-gradient-to-br from-accent/70 to-accent text-white shadow;
+		@apply _btn frosted-glass hover:bg-hover text-balance rounded border text-white shadow hover:bg-white hover:text-black;
 	}
 
 	.action-outline {
